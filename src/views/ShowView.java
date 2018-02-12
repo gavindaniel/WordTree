@@ -3,9 +3,12 @@ package views;
 import java.util.Observable;
 import java.util.Observer;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -14,48 +17,35 @@ import model.WordTree;
 public class ShowView extends BorderPane implements Observer {
 
 	private WordTree theTree;
-	private GridPane gp;
-	
-	private TextField textField;
-	private Button addButton;
+	private ListView<String> list;
 
 	// constructor
 	public ShowView(WordTree tree) {
 		theTree = tree;
-		gp = new GridPane();
-		this.setCenter(gp);
+		list = new ListView<String>();
+		this.setCenter(list);
 		initializePane();
 	}
 	
 	private void initializePane() {
-		addButton = new Button("Add Word");
-		textField = new TextField();
-		textField.setEditable(true);
-		gp.setPrefWidth(300);
-		gp.setPrefHeight(500);
 		
-		ButtonListener handler = new ButtonListener();
-		addButton.setOnAction(handler);
-		
-		GridPane.setConstraints(textField, 1, 1);
-		GridPane.setConstraints(addButton, 2, 1);
-		
-		gp.getChildren().addAll(textField, addButton);
+		list.setPrefWidth(300);
+		list.setPrefHeight(500);
 		
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		//theTree = (WordTree) o;
+		theTree = (WordTree) o;
+		System.out.println("updating list for show...");
+		addWords();
 	}
 	
-	public class ButtonListener implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent event) {
-			// TODO Auto-generated method stub
-			System.out.println("Adding -> '" + textField.getText() + "' to the tree...");
+	private void addWords() {
+		if (!theTree.getRootWord().getString().equals("null")) {
+			ObservableList<String> words = FXCollections.observableArrayList(theTree.getRootWord().getString());
+			list.setItems(words);
 		}
 	}
 }

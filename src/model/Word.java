@@ -9,9 +9,9 @@ public class Word {
 	
 	public Word(String w) {
 		element = w;		// the word = element = key
-		parentWord = new Word("null");
-		leftChild = new Word("null");
-		rightChild = new Word("null");
+//		parentWord = new Word("null");
+//		leftChild = new Word("null");
+//		rightChild = new Word("null");
 	}
 	
 	public String getString() {

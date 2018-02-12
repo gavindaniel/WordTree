@@ -68,13 +68,15 @@ public class AddView extends BorderPane implements Observer {
 				
 				System.out.println("Adding -> '" + text + "' to the tree...");
 				
-				theTree.addWord(new Word(text));
+				theTree.addWord(text);
 				
 				responseText.setText("'" + text + "' added successfully");
+//				update(theTree, "n/a");
 			} else {
 				responseText.setText("Please enter a word");
 			}
 			textField.setText("");
+			System.out.println("root -> " + theTree.getRootWord().getString());
 		}
 	}
 }
