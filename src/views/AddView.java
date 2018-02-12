@@ -30,7 +30,7 @@ public class AddView extends BorderPane implements Observer {
 	}
 	
 	private void initializePane() {
-		addButton = new Button("Add Word");
+		addButton = new Button("Add");
 		textField = new TextField();
 		textField.setEditable(true);
 		responseText = new Label("Enter a word to add");

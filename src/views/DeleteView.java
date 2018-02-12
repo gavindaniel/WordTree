@@ -6,6 +6,7 @@ import java.util.Observer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -17,7 +18,8 @@ public class DeleteView extends BorderPane implements Observer {
 	private GridPane gp;
 	
 	private TextField textField;
-	private Button addButton;
+	private Button deleteButton;
+	private Label responseText;
 
 	// constructor
 	public DeleteView(WordTree tree) {
@@ -28,19 +30,24 @@ public class DeleteView extends BorderPane implements Observer {
 	}
 	
 	private void initializePane() {
-		addButton = new Button("Add Word");
+		deleteButton = new Button("Delete");
 		textField = new TextField();
 		textField.setEditable(true);
+		responseText = new Label("Enter a word to delete");
 		gp.setPrefWidth(300);
-		gp.setPrefHeight(500);
+		gp.setPrefHeight(400);
 		
 		ButtonListener handler = new ButtonListener();
-		addButton.setOnAction(handler);
+		deleteButton.setOnAction(handler);
+		
 		
 		GridPane.setConstraints(textField, 1, 1);
-		GridPane.setConstraints(addButton, 2, 1);
+		GridPane.setConstraints(deleteButton, 2, 1);
+		GridPane.setConstraints(responseText, 1, 2);
 		
-		gp.getChildren().addAll(textField, addButton);
+		gp.setHgap(10);
+		gp.setVgap(30);
+		gp.getChildren().addAll(textField, deleteButton, responseText);
 		
 	}
 	
@@ -55,7 +62,14 @@ public class DeleteView extends BorderPane implements Observer {
 		@Override
 		public void handle(ActionEvent event) {
 			// TODO Auto-generated method stub
-			System.out.println("Adding -> '" + textField.getText() + "' to the tree...");
+			String text = textField.getText();
+			if (!text.isEmpty()) {
+				System.out.println("Deleting -> '" + text + "' from the tree...");
+				responseText.setText("'" + text + "' deleted successfully");
+			} else {
+				responseText.setText("'" + text + "' not found in the list");
+			}
+			textField.setText("");
 		}
 	}
 }
