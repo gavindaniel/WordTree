@@ -54,7 +54,7 @@ public class DeleteView extends BorderPane implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		//theTree = (WordTree) o;
+		theTree = (WordTree) o;
 	}
 	
 	public class ButtonListener implements EventHandler<ActionEvent> {

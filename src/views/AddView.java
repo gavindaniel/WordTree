@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import model.Word;
 import model.WordTree;
 
 public class AddView extends BorderPane implements Observer {
@@ -54,7 +55,7 @@ public class AddView extends BorderPane implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		//theTree = (WordTree) o;
+		theTree = (WordTree) o;
 	}
 	
 	public class ButtonListener implements EventHandler<ActionEvent> {
@@ -64,7 +65,11 @@ public class AddView extends BorderPane implements Observer {
 			// TODO Auto-generated method stub
 			String text = textField.getText();
 			if (!text.isEmpty()) {
+				
 				System.out.println("Adding -> '" + text + "' to the tree...");
+				
+				theTree.addWord(new Word(text));
+				
 				responseText.setText("'" + text + "' added successfully");
 			} else {
 				responseText.setText("Please enter a word");
