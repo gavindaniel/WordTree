@@ -1,1 +1,1 @@
-# lab1-module2
+# Java WordTree practice application that implements search, add, delete.
